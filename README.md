@@ -7,10 +7,8 @@
 ![License](https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge)
 ![Made for Ethiopia](https://img.shields.io/badge/Made%20for-Ethiopia%20🇪🇹-ef4444?style=for-the-badge)
 
----
-## 🚀 Live Demo
 
-**[👉 View Live ](https://aychew1229.github.io/eduplan/)**
+**[Launch Live 🚀](https://aychew1229.github.io/EduPlan/)**
 
 ---
 
@@ -68,16 +66,6 @@
 
 > Zero dependencies. No npm. No build step. Just one HTML file.
 
----
-
-## 📸 Screenshots
-
-| Dashboard | Schedule Grid | Deadlines |
-|---|---|---|
-| Live clock · Stats · Today's classes | Weekly grid with conflict detection | EC + GC dual dates · Edit & Delete |
-
----
-
 ## 🔒 Privacy
 
 All data is stored in your browser's `localStorage`. Nothing is sent to any server. Clearing browser data will erase your planner — export your schedule as `.ics` or `.csv` to back it up.
@@ -86,7 +74,7 @@ All data is stored in your browser's `localStorage`. Nothing is sent to any serv
 
 ## 👤 Author
 
-**Aychew M.** — Electrical & Computer Engineering Student  
+**Aychew M.**: Electrical & Computer Engineering Student  
 Debre Tabor University, Ethiopia  
 
 [![Portfolio](https://img.shields.io/badge/Portfolio-aychew1229.github.io-10b981?style=flat-square)](https://aychew1229.github.io/PersonalPortfolio)
