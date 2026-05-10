@@ -89,7 +89,7 @@ All data is stored in your browser's `localStorage`. Nothing is sent to any serv
 **Aychew M.** — Electrical & Computer Engineering Student  
 Debre Tabor University, Ethiopia  
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-aychew1229.github.io-10b981?style=flat-square)](https://aychew1229.github.io/PersonalPortfoilo)
+[![Portfolio](https://img.shields.io/badge/Portfolio-aychew1229.github.io-10b981?style=flat-square)]([https://aychew1229.github.io/PersonalPortfoilo](https://aychew1229.github.io/PersonalPortfolio/))
 [![GitHub](https://img.shields.io/badge/GitHub-aychew1229-181717?style=flat-square&logo=github)](https://github.com/aychew1229)
 
 ---
