@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eduplan-v1';
+const CACHE_NAME = 'eduplan-v2';
 const ASSETS = [
   './',
   './index.html',
