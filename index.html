@@ -591,6 +591,18 @@
       ::-webkit-scrollbar { width:6px;height:6px; }
       ::-webkit-scrollbar-track { background:var(--bg); }
       ::-webkit-scrollbar-thumb { background:var(--surface3);border-radius:3px; }
+
+      #study-layout {
+  display: grid;
+  grid-template-columns: 1fr; /* Default to 1 column for mobile */
+}
+
+@media (min-width: 640px) {
+  #study-layout {
+    grid-template-columns: 1fr 1fr; /* 2 columns for tablet/desktop */
+  }
+}
+
     </style>
   </head>
   <body>
@@ -1275,9 +1287,9 @@
           <div class="stat-card"><div class="stat-num green-num">${todaySess.length}</div><div class="stat-lbl">Study Sessions</div></div>`;
 
         const conflicts = detectConflicts(classes);
-        document.getElementById("conflict-area").innerHTML = conflicts.length
-          ? `<div class="conflict-banner">⚠️ <strong>${conflicts.length} schedule conflict(s)</strong> detected — fix in the Schedule tab.</div>`
-          : "";
+document.getElementById("conflict-area").innerHTML = conflicts.length
+  ? `<div class="conflict-banner">⚠️ <strong>Conflict: ${conflicts.length} courses</strong> detected.</div>`
+  : "";
 
         const now    = new Date();
         const nowMin = now.getHours()*60+now.getMinutes();
@@ -1314,12 +1326,13 @@
       //  SCHEDULE GRID
       // ══════════════════════════
       function renderScheduleGrid() {
-        const classes   = getData("classes");
-        const conflicts = detectConflicts(classes);
-        const cb = document.getElementById("conflict-banner-schedule");
-        cb.innerHTML = conflicts.length
-          ? `<div class="conflict-banner">⚠️ Conflicts: ${conflicts.map(c=>`<strong>${esc(c)}</strong>`).join(", ")}</div>`
-          : "";
+  const classes   = getData("classes");
+  const conflicts = detectConflicts(classes);
+  const cb = document.getElementById("conflict-banner-schedule");
+
+  cb.innerHTML = conflicts.length
+    ? `<div class="conflict-banner">⚠️ <strong>Conflict: ${conflicts.length} courses</strong> detected.</div>`
+    : "";
 
         const ws = weekStart(weekOffset), we = new Date(ws);
         we.setDate(we.getDate()+5);
@@ -1881,13 +1894,6 @@
       const tc  = t=>({lecture:"#3b82f6",lab:"#10b981",tutorial:"#f59e0b",sport:"#ef4444",other:"#8b5cf6"})[t]||"#3b82f6";
       const tc2 = t=>({exam:"#ef4444",assignment:"#f59e0b",quiz:"#8b5cf6",project:"#10b981",study:"#3b82f6"})[t]||"#3b82f6";
       const esc = s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
-
-      // Responsive study layout
-      const sl=document.getElementById("study-layout");
-      if (sl) {
-        const fix=()=>{ sl.style.gridTemplateColumns=window.innerWidth<640?"1fr":"1fr 1fr"; };
-        fix(); window.addEventListener("resize",fix);
-      }
     </script>
   </body>
 </html>
