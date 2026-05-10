@@ -10,7 +10,8 @@
 ---
 ## 🚀 Live Demo
 
-**[👉 View Live on GitHub Pages](https://aychew1229.github.io/eduplan/)**
+**[👉 View Live ](https://aychew1229.github.io/eduplan/)**
+
 ---
 
 ## ✨ Features
@@ -88,7 +89,7 @@ All data is stored in your browser's `localStorage`. Nothing is sent to any serv
 **Aychew M.** — Electrical & Computer Engineering Student  
 Debre Tabor University, Ethiopia  
 
-[![Portfolio](https://img.shields.io/badge/Portfolio-aychew1229.github.io-10b981?style=flat-square)](https://aychew1229.github.io)
+[![Portfolio](https://img.shields.io/badge/Portfolio-aychew1229.github.io-10b981?style=flat-square)](https://aychew1229.github.io/PersonalPortfoilo)
 [![GitHub](https://img.shields.io/badge/GitHub-aychew1229-181717?style=flat-square&logo=github)](https://github.com/aychew1229)
 
 ---
