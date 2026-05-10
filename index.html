@@ -1848,7 +1848,7 @@
         document.getElementById("confirm-overlay").classList.add("open");
       }
       function closeConfirm()  { document.getElementById("confirm-overlay").classList.remove("open"); _confirmCb=null; }
-      function confirmAction() { closeConfirm(); if (_confirmCb) _confirmCb(); }
+      function confirmAction() { const cb = _confirmCb; closeConfirm(); if (cb) cb(); }
       document.getElementById("confirm-overlay").addEventListener("click",e=>{
         if (e.target===document.getElementById("confirm-overlay")) closeConfirm();
       });
