@@ -1445,29 +1445,26 @@ document.getElementById("conflict-area").innerHTML = conflicts.length
           classes.push({id:uid(),name,day,type,start,end,room,instructor});
           setData("classes",classes);
           closeModal("class-modal");
-          renderScheduleGrid();   // ← FIX: was missing effective refresh in original
-          updateDashboard();       // ← now updates stat cards too
+          renderScheduleGrid();
+          updateDashboard();
           updateBadges();
-          if (conf) toast(`⚠️ Saved but conflicts with "${conf.name}"!`,"error");
-          else      toast(`"${name}" added successfully ✓`,"success");
+          toast(`"${name}" added ✓`, "success");
         }
       }
 
-      // FIX 2: deleteClass — also calls updateDashboard so stat cards refresh
       function deleteClass(id) {
-        showConfirm({
-          icon:"🗑️",title:"Remove this class?",
-          desc:"The class will be permanently removed from your schedule.",
-          okLabel:"Remove",
-          onOk:()=>{
-            setData("classes", getData("classes").filter(c=>c.id!==id));
-            renderScheduleGrid();
-            updateDashboard();      // ← FIX: update stat cards after delete
-            toast("Class removed","success");
-          }
-        });
-      }
-
+  showConfirm({
+    icon: "🗑️", title: "Remove this class?",
+    desc: "The class will be permanently removed.",
+    okLabel: "Remove",
+    onOk: () => {
+      setData("classes", getData("classes").filter(c => c.id !== id));
+      renderScheduleGrid();
+      updateDashboard(); // Ensure dashboard stats update!
+      toast("Class removed", "success");
+    }
+  });
+}
       function detectConflicts(classes) {
         const out=[];
         for (let i=0;i<classes.length;i++)
