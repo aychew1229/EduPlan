@@ -648,6 +648,183 @@
       #toast.error   { border-color:var(--danger);background:rgba(239,68,68,.08); }
       .toast-icon { font-size:16px;flex-shrink:0; }
 
+      /* ══════════════════════════════════════
+         NOTES SECTION
+      ══════════════════════════════════════ */
+      .notes-layout {
+        display:grid;grid-template-columns:300px 1fr;gap:0;height:calc(100vh - 180px);
+        background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+      }
+      /* Sidebar */
+      .notes-sidebar {
+        border-right:1px solid var(--border);display:flex;flex-direction:column;overflow:hidden;
+        background:var(--surface);
+      }
+      .notes-sidebar-header {
+        padding:14px 16px;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:10px;
+        background:var(--surface2);flex-shrink:0;
+      }
+      .notes-search-wrap { position:relative; }
+      .notes-search {
+        width:100%;padding:9px 12px 9px 34px;background:var(--bg);
+        border:1px solid var(--border);border-radius:9px;color:var(--text);
+        font-family:var(--sans);font-size:13px;outline:none;transition:border-color .2s;
+      }
+      .notes-search:focus { border-color:var(--accent); }
+      .notes-search-icon { position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text3); }
+      .notes-filter-row { display:flex;gap:6px;overflow-x:auto;scrollbar-width:none; }
+      .notes-filter-row::-webkit-scrollbar { display:none; }
+      .nf-chip {
+        flex-shrink:0;padding:4px 10px;border-radius:20px;border:1px solid var(--border);
+        background:none;color:var(--text2);font-family:var(--sans);font-size:11px;font-weight:500;
+        cursor:pointer;transition:all .2s;white-space:nowrap;
+      }
+      .nf-chip.active { background:rgba(59,130,246,.15);border-color:var(--accent);color:var(--accent); }
+      .notes-list { flex:1;overflow-y:auto;padding:8px; }
+      .note-card {
+        padding:12px;border-radius:10px;border:1px solid transparent;
+        cursor:pointer;transition:all .2s;margin-bottom:6px;position:relative;
+        background:var(--surface2);
+      }
+      .note-card:hover { border-color:var(--border);background:var(--surface3); }
+      .note-card.active { border-color:var(--accent);background:rgba(59,130,246,.08); }
+      .note-card.pinned { border-left:3px solid var(--accent3); }
+      .nc-top { display:flex;align-items:flex-start;gap:8px;margin-bottom:6px; }
+      .nc-color { width:8px;height:8px;border-radius:50%;flex-shrink:0;margin-top:5px; }
+      .nc-title { font-size:13px;font-weight:600;flex:1;line-height:1.4;word-break:break-word; }
+      .nc-pin { font-size:11px;color:var(--accent3); }
+      .nc-preview { font-size:11px;color:var(--text3);line-height:1.5;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical; }
+      .nc-meta { display:flex;justify-content:space-between;align-items:center;margin-top:8px; }
+      .nc-tag { font-size:10px;padding:2px 8px;border-radius:12px;font-weight:600;letter-spacing:.3px; }
+      .nc-info { font-size:10px;color:var(--text3);font-family:var(--mono); }
+      .notes-add-btn {
+        margin:8px;padding:10px;border-radius:10px;border:1px dashed var(--border);background:none;
+        color:var(--text2);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;
+        transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;
+      }
+      .notes-add-btn:hover { border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.05); }
+      /* Editor panel */
+      .notes-editor {
+        display:flex;flex-direction:column;overflow:hidden;
+        background:var(--bg);
+      }
+      .notes-editor-toolbar {
+        display:flex;align-items:center;gap:2px;padding:10px 14px;border-bottom:1px solid var(--border);
+        background:var(--surface2);flex-wrap:wrap;flex-shrink:0;
+      }
+      .tb-sep { width:1px;height:20px;background:var(--border);margin:0 4px; }
+      .tb-btn {
+        width:30px;height:30px;border:none;background:none;color:var(--text2);
+        font-size:13px;font-weight:700;cursor:pointer;border-radius:6px;
+        transition:all .15s;display:flex;align-items:center;justify-content:center;
+        font-family:var(--mono);
+      }
+      .tb-btn:hover { background:var(--surface3);color:var(--text); }
+      .tb-btn.active { background:rgba(59,130,246,.2);color:var(--accent); }
+      .tb-btn-wide { width:auto;padding:0 8px;font-size:11px; }
+      .editor-meta-row {
+        display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--border);
+        background:var(--surface);flex-wrap:wrap;gap:8px;flex-shrink:0;
+      }
+      .em-title {
+        flex:1;min-width:200px;font-size:17px;font-weight:700;background:none;border:none;
+        color:var(--text);font-family:var(--sans);outline:none;padding:2px 0;
+      }
+      .em-title::placeholder { color:var(--text3); }
+      .em-actions { display:flex;align-items:center;gap:6px; }
+      .em-btn {
+        padding:5px 10px;border-radius:7px;border:1px solid var(--border);background:var(--surface2);
+        color:var(--text2);font-family:var(--sans);font-size:11px;font-weight:500;
+        cursor:pointer;transition:all .2s;white-space:nowrap;
+      }
+      .em-btn:hover { background:var(--surface3);color:var(--text); }
+      .em-btn.danger:hover { background:rgba(239,68,68,.15);border-color:var(--danger);color:var(--danger); }
+      .em-btn.pin-active { border-color:var(--accent3);color:var(--accent3);background:rgba(245,158,11,.08); }
+      .editor-options-row {
+        display:flex;align-items:center;gap:10px;padding:8px 16px;border-bottom:1px solid var(--border);
+        background:var(--surface);flex-wrap:wrap;flex-shrink:0;
+      }
+      .eo-label { font-size:11px;color:var(--text3);font-weight:500;text-transform:uppercase;letter-spacing:.4px; }
+      .eo-select {
+        padding:4px 8px;background:var(--bg);border:1px solid var(--border);border-radius:7px;
+        color:var(--text);font-family:var(--sans);font-size:12px;outline:none;cursor:pointer;
+      }
+      .eo-select:focus { border-color:var(--accent); }
+      .color-dots { display:flex;gap:5px;align-items:center; }
+      .color-dot {
+        width:16px;height:16px;border-radius:50%;cursor:pointer;border:2px solid transparent;
+        transition:transform .15s;flex-shrink:0;
+      }
+      .color-dot:hover { transform:scale(1.2); }
+      .color-dot.selected { border-color:var(--text);transform:scale(1.15); }
+      .save-indicator {
+        margin-left:auto;font-size:11px;color:var(--accent2);font-family:var(--mono);
+        display:flex;align-items:center;gap:5px;opacity:0;transition:opacity .3s;
+      }
+      .save-indicator.show { opacity:1; }
+      .notes-content-area {
+        flex:1;overflow-y:auto;padding:20px;display:flex;flex-direction:column;gap:0;
+      }
+      /* Rich editor area */
+      #note-editor {
+        flex:1;outline:none;font-family:var(--sans);font-size:14px;line-height:1.8;
+        color:var(--text);caret-color:var(--accent);min-height:300px;
+        word-break:break-word;
+      }
+      #note-editor:empty::before {
+        content:attr(data-placeholder);color:var(--text3);pointer-events:none;
+      }
+      #note-editor h1 { font-size:22px;font-weight:800;margin:12px 0 6px;color:var(--text);letter-spacing:-.3px; }
+      #note-editor h2 { font-size:17px;font-weight:700;margin:10px 0 4px;color:var(--text); }
+      #note-editor h3 { font-size:14px;font-weight:700;margin:8px 0 4px;color:var(--text2); }
+      #note-editor ul,#note-editor ol { padding-left:22px;margin:6px 0; }
+      #note-editor li { margin:3px 0; }
+      #note-editor code {
+        font-family:var(--mono);font-size:12px;background:rgba(59,130,246,.12);
+        color:#7dd3fc;padding:1px 6px;border-radius:4px;
+      }
+      #note-editor pre {
+        font-family:var(--mono);font-size:12px;background:var(--surface2);
+        border:1px solid var(--border);border-radius:8px;padding:14px;margin:10px 0;
+        overflow-x:auto;line-height:1.6;color:#7dd3fc;white-space:pre;
+      }
+      #note-editor blockquote {
+        border-left:3px solid var(--accent);margin:8px 0;padding:6px 14px;
+        background:rgba(59,130,246,.06);border-radius:0 8px 8px 0;
+        color:var(--text2);font-style:italic;
+      }
+      #note-editor .math-block {
+        font-family:var(--mono);background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.25);
+        border-radius:8px;padding:10px 14px;margin:8px 0;color:var(--accent3);font-size:13px;
+      }
+      #note-editor a { color:var(--accent); }
+      .editor-word-count {
+        padding:8px 20px;font-size:11px;color:var(--text3);border-top:1px solid var(--border);
+        font-family:var(--mono);flex-shrink:0;background:var(--surface);
+      }
+      /* Empty editor placeholder */
+      .notes-empty-editor {
+        flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+        gap:12px;color:var(--text3);
+      }
+      .notes-empty-editor .es-icon { font-size:48px; }
+      .notes-empty-editor .es-title { font-size:16px;font-weight:600;color:var(--text2); }
+      .notes-empty-editor .es-text { font-size:13px;text-align:center;line-height:1.7;max-width:280px; }
+      /* Focus / distraction-free mode */
+      .notes-layout.focus-mode .notes-sidebar { display:none; }
+      .notes-layout.focus-mode { grid-template-columns:1fr; }
+      /* Math input helper */
+      .math-helper {
+        background:var(--surface2);border:1px solid var(--border);border-radius:8px;
+        padding:10px 14px;margin-bottom:10px;display:none;
+      }
+      .math-helper.show { display:flex;align-items:center;gap:10px;flex-wrap:wrap; }
+      .math-helper input {
+        flex:1;min-width:180px;background:var(--bg);border:1px solid var(--border);border-radius:7px;
+        color:var(--accent3);font-family:var(--mono);font-size:13px;padding:7px 10px;outline:none;
+      }
+      .math-helper input:focus { border-color:var(--accent3); }
+
       /* ── RESPONSIVE ── */
       @media (max-width:768px) {
         nav { padding:0 14px;height:56px; }
@@ -658,7 +835,10 @@
         main { padding:16px 12px;padding-bottom:90px; }
         .dash-row { grid-template-columns:1fr; }
         .form-row { grid-template-columns:1fr; }
-        #study-layout { grid-template-columns:1fr!important; }
+        .notes-layout { grid-template-columns:1fr;height:auto; }
+        .notes-sidebar { height:280px; }
+        .notes-editor { min-height:400px; }
+        
         .timer-card { padding:24px 16px; }
         .timer-display { font-size:44px; }
         .stat-row { grid-template-columns:1fr 1fr; }
@@ -819,6 +999,9 @@
             <span>🔔</span><span class="label"> Reminders</span>
             <span class="badge" id="reminder-badge" style="display:none">0</span>
           </button>
+          <button class="nav-tab" onclick="goPage('notes')" id="tab-notes">
+            <span>📝</span><span class="label"> Notes</span>
+          </button>
         </div>
         <div class="nav-right">
           <div class="nav-user">Hi, <strong id="nav-name">—</strong></div>
@@ -843,6 +1026,9 @@
         <button class="mob-tab" onclick="goPage('reminders')" id="mob-tab-reminders" style="position:relative">
           <div class="mob-icon">🔔</div><span>Remind</span>
           <span class="mob-badge" id="mob-reminder-badge" style="display:none">0</span>
+        </button>
+        <button class="mob-tab" onclick="goPage('notes')" id="mob-tab-notes">
+          <div class="mob-icon">📝</div><span>Notes</span>
         </button>
       </div>
 
@@ -1004,6 +1190,104 @@
               <button class="btn-add" onclick="exportICS()">📅 Export .ics (Calendar)</button>
               <button class="btn-add green" onclick="exportCSV()">📊 Export CSV</button>
               <button class="btn-add amber" onclick="window.print()">🖨️ Print Schedule</button>
+            </div>
+          </div>
+        </div>
+        <!-- NOTES -->
+        <div class="page" id="page-notes">
+          <div class="page-header">
+            <div>
+              <div class="page-title">📝 <span>Notes</span></div>
+              <div class="page-subtitle">Class notes, free-form ideas — all in one place</div>
+            </div>
+            <div class="actions">
+              <button class="btn-sm" id="focus-mode-btn" onclick="toggleFocusMode()" title="Toggle distraction-free mode">🖥️ Focus Mode</button>
+              <button class="btn-add" onclick="newNote()">+ New Note</button>
+            </div>
+          </div>
+          <div class="notes-layout" id="notes-layout">
+            <!-- SIDEBAR -->
+            <div class="notes-sidebar">
+              <div class="notes-sidebar-header">
+                <div class="notes-search-wrap">
+                  <span class="notes-search-icon">🔍</span>
+                  <input class="notes-search" type="text" id="notes-search" placeholder="Search notes…" oninput="renderNotesList()" />
+                </div>
+                <div class="notes-filter-row" id="notes-filter-row">
+                  <button class="nf-chip active" onclick="setNoteFilter('all')" data-filter="all">All</button>
+                  <button class="nf-chip" onclick="setNoteFilter('pinned')" data-filter="pinned">📌 Pinned</button>
+                  <!-- Subject chips injected dynamically -->
+                </div>
+              </div>
+              <div class="notes-list" id="notes-list"></div>
+              <button class="notes-add-btn" onclick="newNote()">＋ New Note</button>
+            </div>
+            <!-- EDITOR -->
+            <div class="notes-editor" id="notes-editor-panel">
+              <!-- Empty state -->
+              <div class="notes-empty-editor" id="notes-empty-state">
+                <div class="es-icon">📓</div>
+                <div class="es-title">No note selected</div>
+                <div class="es-text">Select a note from the list or create a new one to start writing.</div>
+                <button class="btn-add" style="margin-top:8px" onclick="newNote()">+ Create First Note</button>
+              </div>
+              <!-- Active editor (hidden until note selected) -->
+              <div id="notes-active-editor" style="display:none;flex-direction:column;height:100%">
+                <!-- Toolbar -->
+                <div class="notes-editor-toolbar" id="notes-toolbar">
+                  <button class="tb-btn" onclick="fmt('bold')" title="Bold (Ctrl+B)"><b>B</b></button>
+                  <button class="tb-btn" onclick="fmt('italic')" title="Italic (Ctrl+I)"><i>I</i></button>
+                  <button class="tb-btn" onclick="fmt('underline')" title="Underline (Ctrl+U)" style="text-decoration:underline">U</button>
+                  <div class="tb-sep"></div>
+                  <button class="tb-btn tb-btn-wide" onclick="fmtBlock('h1')" title="Heading 1">H1</button>
+                  <button class="tb-btn tb-btn-wide" onclick="fmtBlock('h2')" title="Heading 2">H2</button>
+                  <button class="tb-btn tb-btn-wide" onclick="fmtBlock('h3')" title="Heading 3">H3</button>
+                  <div class="tb-sep"></div>
+                  <button class="tb-btn" onclick="fmt('insertUnorderedList')" title="Bullet List">•≡</button>
+                  <button class="tb-btn" onclick="fmt('insertOrderedList')" title="Numbered List">1≡</button>
+                  <div class="tb-sep"></div>
+                  <button class="tb-btn tb-btn-wide" onclick="insertCodeBlock()" title="Code Block">&lt;/&gt;</button>
+                  <button class="tb-btn tb-btn-wide" onclick="insertBlockquote()" title="Blockquote">"</button>
+                  <button class="tb-btn tb-btn-wide" onclick="toggleMathHelper()" title="Math/Equation">∑</button>
+                  <div class="tb-sep"></div>
+                  <button class="tb-btn" onclick="fmt('undo')" title="Undo (Ctrl+Z)">↩</button>
+                  <button class="tb-btn" onclick="fmt('redo')" title="Redo (Ctrl+Y)">↪</button>
+                </div>
+                <!-- Math helper bar -->
+                <div class="math-helper" id="math-helper">
+                  <span style="font-size:12px;color:var(--text3);white-space:nowrap">∑ Equation:</span>
+                  <input type="text" id="math-input" placeholder="e.g. E = mc² or ∫f(x)dx" />
+                  <button class="em-btn" onclick="insertMath()">Insert</button>
+                  <button class="em-btn" onclick="toggleMathHelper()">✕</button>
+                </div>
+                <!-- Title + actions row -->
+                <div class="editor-meta-row">
+                  <input class="em-title" type="text" id="note-title-input" placeholder="Note title…" oninput="scheduleNoteSave()" />
+                  <div class="em-actions">
+                    <button class="em-btn" id="pin-btn" onclick="toggleNotePin()" title="Pin note">📌 Pin</button>
+                    <button class="em-btn" onclick="exportNotePDF()" title="Export as PDF">⬇ PDF</button>
+                    <button class="em-btn danger" onclick="deleteCurrentNote()" title="Delete note">🗑 Delete</button>
+                  </div>
+                </div>
+                <!-- Subject + color row -->
+                <div class="editor-options-row">
+                  <span class="eo-label">Subject</span>
+                  <select class="eo-select" id="note-subject-sel" onchange="scheduleNoteSave()">
+                    <option value="">— Free Note —</option>
+                  </select>
+                  <span class="eo-label">Label</span>
+                  <div class="color-dots" id="note-color-dots"></div>
+                  <div class="save-indicator" id="save-indicator">✔ Saved</div>
+                </div>
+                <!-- Editable content -->
+                <div class="notes-content-area">
+                  <div id="note-editor" contenteditable="true"
+                       data-placeholder="Start typing… use the toolbar above or Ctrl+B / Ctrl+I"
+                       oninput="scheduleNoteSave();updateWordCount()"
+                       onkeydown="handleEditorKeydown(event)"></div>
+                </div>
+                <div class="editor-word-count" id="editor-word-count">0 words · last edited —</div>
+              </div>
             </div>
           </div>
         </div>
@@ -1315,6 +1599,7 @@
         renderReminders();
         renderStudyLog();
         updateBadges();
+        initNotes();
         setInterval(updateBadges, 30000);
       }
 
@@ -1331,6 +1616,7 @@
         if (id==="deadlines") renderDeadlines();
         if (id==="reminders") renderReminders();
         if (id==="study")     renderStudyLog();
+        if (id==="notes")     renderNotesList();
       }
 
       // ══════════════════════════
@@ -1964,6 +2250,382 @@
       // ══════════════════════════
       //  UTILITIES
       // ══════════════════════════
+      // ══════════════════════════════════════════
+      //  NOTES MODULE
+      // ══════════════════════════════════════════
+      const NOTE_COLORS = [
+        {id:"blue",  hex:"#3b82f6", label:"Blue"},
+        {id:"green", hex:"#10b981", label:"Green"},
+        {id:"amber", hex:"#f59e0b", label:"Amber"},
+        {id:"red",   hex:"#ef4444", label:"Red"},
+        {id:"purple",hex:"#8b5cf6", label:"Purple"},
+        {id:"teal",  hex:"#06b6d4", label:"Teal"},
+      ];
+      let activeNoteId  = null;
+      let noteSaveTimer = null;
+      let noteFocusMode = false;
+      let noteFilter    = "all";
+
+      function initNotes() {
+        renderSubjectFilterChips();
+        renderNoteColorDots();
+        renderNotesList();
+        populateNoteSubjectSelect();
+      }
+
+      function renderSubjectFilterChips() {
+        const classes = getData("classes");
+        const row = document.getElementById("notes-filter-row");
+        // Keep static chips, add subject chips
+        const existing = row.querySelectorAll("[data-filter]");
+        existing.forEach(el => { if(el.dataset.filter !== "all" && el.dataset.filter !== "pinned") el.remove(); });
+        const subjects = [...new Set(classes.map(c=>c.name))];
+        subjects.slice(0,6).forEach(s => {
+          const btn = document.createElement("button");
+          btn.className = "nf-chip";
+          btn.dataset.filter = s;
+          btn.textContent = s;
+          btn.onclick = () => setNoteFilter(s);
+          row.appendChild(btn);
+        });
+      }
+
+      function setNoteFilter(f) {
+        noteFilter = f;
+        document.querySelectorAll(".nf-chip").forEach(c => {
+          c.classList.toggle("active", c.dataset.filter === f);
+        });
+        renderNotesList();
+      }
+
+      function renderNoteColorDots() {
+        const wrap = document.getElementById("note-color-dots");
+        wrap.innerHTML = NOTE_COLORS.map(c =>
+          `<div class="color-dot" style="background:${c.hex}" data-cid="${c.id}" title="${c.label}" onclick="setNoteColor('${c.id}')"></div>`
+        ).join("");
+      }
+
+      function setNoteColor(cid) {
+        if (!activeNoteId) return;
+        document.querySelectorAll(".color-dot").forEach(d => d.classList.toggle("selected", d.dataset.cid === cid));
+        updateActiveNote({color: cid});
+        renderNotesList();
+      }
+
+      function populateNoteSubjectSelect() {
+        const classes = getData("classes");
+        const sel = document.getElementById("note-subject-sel");
+        const cur = sel.value;
+        sel.innerHTML = '<option value="">— Free Note —</option>';
+        [...new Set(classes.map(c=>c.name))].forEach(name => {
+          const o = document.createElement("option");
+          o.value = name; o.textContent = name;
+          sel.appendChild(o);
+        });
+        if (cur) sel.value = cur;
+      }
+
+      function getNotes() { return getData("notes", []); }
+      function saveNotes(arr) { setData("notes", arr); }
+
+      function renderNotesList() {
+        const query = (document.getElementById("notes-search")?.value || "").toLowerCase();
+        let notes = getNotes();
+        if (noteFilter === "pinned") notes = notes.filter(n => n.pinned);
+        else if (noteFilter !== "all") notes = notes.filter(n => n.subject === noteFilter);
+        if (query) notes = notes.filter(n =>
+          (n.title||"").toLowerCase().includes(query) ||
+          stripHtml(n.content||"").toLowerCase().includes(query)
+        );
+        // Pinned first
+        notes = [...notes.filter(n=>n.pinned), ...notes.filter(n=>!n.pinned)];
+        const list = document.getElementById("notes-list");
+        if (!notes.length) {
+          list.innerHTML = `<div class="empty-state" style="padding:32px 12px">
+            <div class="es-icon">📭</div>
+            <div class="es-text">${query?"No notes match your search.":"No notes yet.<br>Hit + New Note to start!"}</div>
+          </div>`;
+          return;
+        }
+        list.innerHTML = notes.map(n => {
+          const color = NOTE_COLORS.find(c=>c.id===n.color) || NOTE_COLORS[0];
+          const preview = stripHtml(n.content||"").slice(0,100) || "—";
+          const edited = n.updatedAt ? fmtNoteDate(n.updatedAt) : "";
+          const wc = wordCount(stripHtml(n.content||""));
+          return `<div class="note-card${n.id===activeNoteId?" active":""}${n.pinned?" pinned":""}" onclick="openNote('${n.id}')">
+            <div class="nc-top">
+              <div class="nc-color" style="background:${color.hex}"></div>
+              <div class="nc-title">${esc(n.title||"Untitled")}</div>
+              ${n.pinned?'<span class="nc-pin">📌</span>':""}
+            </div>
+            <div class="nc-preview">${esc(preview)}</div>
+            <div class="nc-meta">
+              ${n.subject?`<span class="nc-tag" style="background:rgba(59,130,246,.12);color:var(--accent)">${esc(n.subject)}</span>`:'<span class="nc-tag" style="background:var(--surface3);color:var(--text3)">Free</span>'}
+              <span class="nc-info">${wc}w · ${edited}</span>
+            </div>
+          </div>`;
+        }).join("");
+      }
+
+      function openNote(id) {
+        activeNoteId = id;
+        const notes = getNotes();
+        const note = notes.find(n=>n.id===id);
+        if (!note) return;
+        document.getElementById("notes-empty-state").style.display = "none";
+        const ae = document.getElementById("notes-active-editor");
+        ae.style.display = "flex";
+        document.getElementById("note-title-input").value = note.title || "";
+        document.getElementById("note-editor").innerHTML = note.content || "";
+        document.getElementById("note-subject-sel").value = note.subject || "";
+        // color dots
+        document.querySelectorAll(".color-dot").forEach(d => d.classList.toggle("selected", d.dataset.cid === (note.color||"blue")));
+        // pin btn
+        updatePinBtn(note.pinned);
+        updateWordCount();
+        renderNotesList();
+      }
+
+      function newNote() {
+        const note = {
+          id: uid(), title:"", content:"", subject:"", color:"blue",
+          pinned:false, createdAt:Date.now(), updatedAt:Date.now()
+        };
+        const notes = getNotes();
+        notes.unshift(note);
+        saveNotes(notes);
+        populateNoteSubjectSelect();
+        renderSubjectFilterChips();
+        renderNotesList();
+        openNote(note.id);
+        setTimeout(()=>document.getElementById("note-title-input").focus(), 50);
+      }
+
+      function updateActiveNote(patch) {
+        if (!activeNoteId) return;
+        const notes = getNotes();
+        const i = notes.findIndex(n=>n.id===activeNoteId);
+        if (i<0) return;
+        Object.assign(notes[i], patch, {updatedAt: Date.now()});
+        saveNotes(notes);
+      }
+
+      function scheduleNoteSave() {
+        clearTimeout(noteSaveTimer);
+        noteSaveTimer = setTimeout(()=>{
+          if (!activeNoteId) return;
+          const title   = document.getElementById("note-title-input").value;
+          const content = document.getElementById("note-editor").innerHTML;
+          const subject = document.getElementById("note-subject-sel").value;
+          updateActiveNote({title, content, subject});
+          renderNotesList();
+          showSaveIndicator();
+        }, 600);
+      }
+
+      function showSaveIndicator() {
+        const el = document.getElementById("save-indicator");
+        el.classList.add("show");
+        setTimeout(()=>el.classList.remove("show"), 2000);
+      }
+
+      function updateWordCount() {
+        const text = stripHtml(document.getElementById("note-editor")?.innerHTML || "");
+        const wc   = wordCount(text);
+        const notes = getNotes();
+        const note  = notes.find(n=>n.id===activeNoteId);
+        const edited = note ? fmtNoteDate(note.updatedAt) : "—";
+        document.getElementById("editor-word-count").textContent = `${wc} word${wc!==1?"s":""} · last edited ${edited}`;
+      }
+
+      function toggleNotePin() {
+        if (!activeNoteId) return;
+        const notes = getNotes();
+        const note  = notes.find(n=>n.id===activeNoteId);
+        if (!note) return;
+        note.pinned = !note.pinned;
+        note.updatedAt = Date.now();
+        saveNotes(notes);
+        updatePinBtn(note.pinned);
+        renderNotesList();
+        showSaveIndicator();
+        toast(note.pinned?"📌 Note pinned":"Note unpinned");
+      }
+
+      function updatePinBtn(pinned) {
+        const btn = document.getElementById("pin-btn");
+        if (!btn) return;
+        btn.textContent = pinned ? "📌 Unpin" : "📌 Pin";
+        btn.classList.toggle("pin-active", !!pinned);
+      }
+
+      function deleteCurrentNote() {
+        if (!activeNoteId) return;
+        showConfirm({
+          icon:"🗑️", title:"Delete Note?",
+          desc:"This note will be permanently deleted.",
+          okLabel:"Delete",
+          onOk: () => {
+            let notes = getNotes();
+            notes = notes.filter(n=>n.id!==activeNoteId);
+            saveNotes(notes);
+            activeNoteId = null;
+            document.getElementById("notes-empty-state").style.display = "";
+            document.getElementById("notes-active-editor").style.display = "none";
+            renderNotesList();
+            toast("Note deleted","success");
+          }
+        });
+      }
+
+      function toggleFocusMode() {
+        noteFocusMode = !noteFocusMode;
+        document.getElementById("notes-layout").classList.toggle("focus-mode", noteFocusMode);
+        document.getElementById("focus-mode-btn").textContent = noteFocusMode ? "◀ Exit Focus" : "🖥️ Focus Mode";
+        toast(noteFocusMode ? "Focus mode on — sidebar hidden" : "Focus mode off");
+      }
+
+      // ── Rich editor helpers ──
+      function fmt(cmd) {
+        document.getElementById("note-editor").focus();
+        document.execCommand(cmd, false, null);
+        scheduleNoteSave();
+      }
+
+      function fmtBlock(tag) {
+        document.getElementById("note-editor").focus();
+        document.execCommand("formatBlock", false, tag);
+        scheduleNoteSave();
+      }
+
+      function insertCodeBlock() {
+        const editor = document.getElementById("note-editor");
+        editor.focus();
+        const sel = window.getSelection();
+        const selectedText = sel.rangeCount ? sel.getRangeAt(0).toString() : "";
+        const pre = document.createElement("pre");
+        pre.textContent = selectedText || "// code here";
+        if (sel.rangeCount) {
+          const range = sel.getRangeAt(0);
+          range.deleteContents();
+          range.insertNode(pre);
+          // move cursor after pre
+          const after = document.createTextNode("\n");
+          pre.after(after);
+          range.setStartAfter(after); range.collapse(true);
+          sel.removeAllRanges(); sel.addRange(range);
+        }
+        scheduleNoteSave();
+      }
+
+      function insertBlockquote() {
+        document.getElementById("note-editor").focus();
+        document.execCommand("formatBlock", false, "blockquote");
+        scheduleNoteSave();
+      }
+
+      function toggleMathHelper() {
+        const mh = document.getElementById("math-helper");
+        mh.classList.toggle("show");
+        if (mh.classList.contains("show")) document.getElementById("math-input").focus();
+      }
+
+      function insertMath() {
+        const val = document.getElementById("math-input").value.trim();
+        if (!val) return;
+        const editor = document.getElementById("note-editor");
+        editor.focus();
+        const div = document.createElement("div");
+        div.className = "math-block";
+        div.textContent = val;
+        const sel = window.getSelection();
+        if (sel.rangeCount) {
+          const range = sel.getRangeAt(0);
+          range.collapse(false);
+          range.insertNode(div);
+          const after = document.createElement("br");
+          div.after(after);
+          range.setStartAfter(after); range.collapse(true);
+          sel.removeAllRanges(); sel.addRange(range);
+        }
+        document.getElementById("math-input").value = "";
+        document.getElementById("math-helper").classList.remove("show");
+        scheduleNoteSave();
+      }
+
+      function handleEditorKeydown(e) {
+        // Keyboard shortcuts
+        if (e.ctrlKey || e.metaKey) {
+          if (e.key==="b") { e.preventDefault(); fmt("bold"); }
+          if (e.key==="i") { e.preventDefault(); fmt("italic"); }
+          if (e.key==="u") { e.preventDefault(); fmt("underline"); }
+        }
+        // Markdown-style shortcuts on Enter or Space
+        if (e.key===" " || e.key==="Enter") {
+          const sel = window.getSelection();
+          if (sel.rangeCount) {
+            const range = sel.getRangeAt(0);
+            const node  = range.startContainer;
+            const text  = node.textContent || "";
+            const before = text.slice(0, range.startOffset);
+            if (e.key===" ") {
+              if (before==="#")  { e.preventDefault(); deleteLineText(node,range); fmtBlock("h1"); return; }
+              if (before==="##") { e.preventDefault(); deleteLineText(node,range); fmtBlock("h2"); return; }
+              if (before==="###"){ e.preventDefault(); deleteLineText(node,range); fmtBlock("h3"); return; }
+              if (before==="-" || before==="*") { e.preventDefault(); deleteLineText(node,range); fmt("insertUnorderedList"); return; }
+              if (before==="1.") { e.preventDefault(); deleteLineText(node,range); fmt("insertOrderedList"); return; }
+            }
+          }
+        }
+        scheduleNoteSave();
+      }
+
+      function deleteLineText(node, range) {
+        node.textContent = "";
+        range.setStart(node,0); range.collapse(true);
+        window.getSelection().removeAllRanges(); window.getSelection().addRange(range);
+      }
+
+      // ── Export as PDF ──
+      function exportNotePDF() {
+        if (!activeNoteId) return;
+        const notes = getNotes();
+        const note  = notes.find(n=>n.id===activeNoteId);
+        if (!note) return;
+        const win = window.open("","_blank");
+        win.document.write(`<!DOCTYPE html><html><head>
+          <meta charset="UTF-8"><title>${esc(note.title||"Untitled")}</title>
+          <style>
+            body{font-family:Georgia,serif;max-width:740px;margin:40px auto;color:#111;line-height:1.8;font-size:15px}
+            h1{font-size:26px;margin-bottom:4px} h2{font-size:20px} h3{font-size:16px}
+            pre{background:#f3f4f6;border-radius:6px;padding:12px;font-size:13px;overflow:auto}
+            blockquote{border-left:3px solid #3b82f6;padding:6px 14px;color:#555;margin:8px 0}
+            .math-block{background:#fffbeb;border:1px solid #fcd34d;border-radius:6px;padding:8px 12px;color:#92400e;font-family:monospace}
+            .meta{color:#888;font-size:13px;margin-bottom:20px}
+          </style>
+        </head><body>
+          <h1>${esc(note.title||"Untitled")}</h1>
+          <div class="meta">Subject: ${esc(note.subject||"Free Note")} · ${fmtNoteDate(note.updatedAt)}</div>
+          ${note.content||""}
+        </body></html>`);
+        win.document.close();
+        setTimeout(()=>{ win.focus(); win.print(); }, 400);
+        toast("Opening print/PDF dialog…","success");
+      }
+
+      // ── Utilities ──
+      function stripHtml(html) { const d=document.createElement("div"); d.innerHTML=html; return d.textContent||d.innerText||""; }
+      function wordCount(text) { return text.trim().split(/\s+/).filter(Boolean).length; }
+      function fmtNoteDate(ts) {
+        if (!ts) return "—";
+        const d = new Date(ts);
+        const now = new Date();
+        const diffH = (now-d)/3600000;
+        if (diffH < 1) return "just now";
+        if (diffH < 24) return `${Math.floor(diffH)}h ago`;
+        return d.toLocaleDateString("en-ET",{month:"short",day:"numeric"});
+      }
+
       const uid       = ()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
       const tMin      = t=>{ const [h,m]=t.split(":"); return parseInt(h)*60+parseInt(m||0); };
       const daysUntil = ds=>{ const n=new Date(); n.setHours(0,0,0,0); const d=new Date(ds); d.setHours(0,0,0,0); return Math.round((d-n)/86400000); };
