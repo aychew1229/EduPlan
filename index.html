@@ -8,36 +8,6 @@
     <link rel="icon" type="image/png" href="icon.png">
     <link rel="manifest" href="manifest.json">
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
-    <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js').then(reg => {
-        console.log("EduPlan PWA Registered");
-
-        // Detect if a new version of the service worker is available
-        reg.addEventListener('updatefound', () => {
-          const newWorker = reg.installing;
-          newWorker.addEventListener('statechange', () => {
-            // If a new worker is installed, tell it to take over immediately
-            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-              newWorker.postMessage({ type: 'SKIP_WAITING' });
-            }
-          });
-        });
-      });
-
-      // When the new service worker takes control, reload the page automatically
-      let refreshing = false;
-      navigator.serviceWorker.addEventListener('controllerchange', () => {
-        if (!refreshing) {
-          window.location.reload();
-          refreshing = true;
-        }
-      });
-    });
-  }
-</script>
-
     <style>
       :root {
         --bg: #0a0f1e;
@@ -2660,6 +2630,45 @@
       const tc        = t=>({lecture:"#3b82f6",lab:"#10b981",tutorial:"#f59e0b",sport:"#ef4444",other:"#8b5cf6"})[t]||"#3b82f6";
       const tc2       = t=>({exam:"#ef4444",assignment:"#f59e0b",quiz:"#8b5cf6",project:"#10b981",study:"#3b82f6"})[t]||"#3b82f6";
       const esc       = s=>(s||"").replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
+
+    
+      if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .then((registration) => {
+        console.log('SW Registered');
+
+        // Check for updates every time the app is opened
+        registration.update();
+
+        // Detect if a new service worker is waiting to take over
+        registration.onupdatefound = () => {
+          const installingWorker = registration.installing;
+          installingWorker.onstatechange = () => {
+            if (installingWorker.state === 'installed') {
+              if (navigator.serviceWorker.controller) {
+                // New content is available; force the reload
+                console.log('New update detected. Refreshing...');
+                window.location.reload();
+              }
+            }
+          };
+        };
+      })
+      .catch((error) => {
+        console.error('SW Registration failed:', error);
+      });
+  });
+
+  // Listener to refresh the page when the new SW takes control
+  let refreshing = false;
+  navigator.serviceWorker.addEventListener('controllerchange', () => {
+    if (!refreshing) {
+      window.location.reload();
+      refreshing = true;
+    }
+  });
+}
     </script>
   </body>
 </html>
