@@ -1,43 +1,64 @@
-const CACHE_NAME = 'eduplan-v3'; // Increment this number to trigger the update
-const ASSETS = [
+const CACHE_NAME = 'eduplan-v1.1'; // Change this number to force an update
+const ASSETS_TO_CACHE = [
   './',
-  './index.html',
-  './manifest.json',
-  './icon.png',
-  'https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
+  'index.html',
+  'manifest.json',
+  'icon.png', // Ensure this file exists!
+  'https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&display=swap'
 ];
 
-// Install event: Cache the assets
-self.addEventListener('install', (e) => {
-  self.skipWaiting(); // Force the waiting service worker to become the active one
-  e.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(ASSETS))
+// 1. Install Phase: Cache everything for offline use
+self.addEventListener('install', (event) => {
+  self.skipWaiting(); // Force the new SW to become active immediately
+  event.waitUntil(
+    caches.open(CACHE_NAME).then((cache) => {
+      console.log('SW: Caching assets for offline lock');
+      return cache.addAll(ASSETS_TO_CACHE);
+    })
   );
 });
 
-// Activate event: Clean up old caches and take control
-self.addEventListener('activate', (e) => {
-  e.waitUntil(clients.claim()); // Take control of all open pages immediately
-  e.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(keys
-        .filter(key => key !== CACHE_NAME)
-        .map(key => caches.delete(key))
+// 2. Activate Phase: Delete old caches
+self.addEventListener('activate', (event) => {
+  event.waitUntil(clients.claim()); // Take control of the page immediately
+  event.waitUntil(
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames.map((cache) => {
+          if (cache !== CACHE_NAME) {
+            console.log('SW: Clearing old cache');
+            return caches.delete(cache);
+          }
+        })
       );
     })
   );
 });
 
-// Fetch event: Serve from cache or network
-self.addEventListener('fetch', (e) => {
-  e.respondWith(
-    caches.match(e.request).then(res => res || fetch(e.request))
+// 3. Fetch Phase: Network-First Strategy
+self.addEventListener('fetch', (event) => {
+  event.respondWith(
+    fetch(event.request)
+      .then((networkResponse) => {
+        // If online, update the cache with the newest version of the file
+        return caches.open(CACHE_NAME).then((cache) => {
+          if (event.request.method === 'GET') {
+            cache.put(event.request, networkResponse.clone());
+          }
+          return networkResponse;
+        });
+      })
+      .catch(() => {
+        // If offline, look in the cache
+        return caches.match(event.request).then((cachedResponse) => {
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // Fallback to index.html for navigation if nothing is found
+          if (event.request.mode === 'navigate') {
+            return caches.match('index.html');
+          }
+        });
+      })
   );
-});
-
-// Listen for skipWaiting message from the frontend
-self.addEventListener('message', (event) => {
-  if (event.data && event.data.type === 'SKIP_WAITING') {
-    self.skipWaiting();
-  }
 });
