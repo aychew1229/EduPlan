@@ -1,4 +1,4 @@
-const CACHE_NAME = 'eduplan-v1.1'; // Change this number to force an update
+const CACHE_NAME = 'eduplan-v1.2';
 const ASSETS_TO_CACHE = [
   './',
   'index.html',
