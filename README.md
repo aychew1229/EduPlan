@@ -4,7 +4,6 @@
 > Featuring a dual-calendar system (Gregorian + Ethiopian EC), Pomodoro timer, conflict detection, and offline-first local storage.
 
 ![EduPlan Preview](https://img.shields.io/badge/Status-Live-10b981?style=for-the-badge)
-![License](https://img.shields.io/badge/License-MIT-3b82f6?style=for-the-badge)
 ![Made for Ethiopia](https://img.shields.io/badge/Made%20for-Ethiopia%20🇪🇹-ef4444?style=for-the-badge)
 
 
