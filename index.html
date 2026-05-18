@@ -1644,7 +1644,10 @@
         document.getElementById("conflict-area").innerHTML = conflicts.length
           ? `<div class="conflict-banner">⚠️ <strong>Conflict: ${conflicts.length} courses</strong> detected.</div>` : "";
 
-        const now = new Date(); const nowMin = now.getHours()*60+now.getMinutes();
+        const now = new Date();
+        // Convert standard time to Ethiopian local time (ET = standard - 6 hours)
+        const etMin = ((now.getHours()*60+now.getMinutes()) - 360 + 1440) % 1440;
+        const nowMin = etMin;
         const sorted = todayClasses.sort((a,b)=>a.start.localeCompare(b.start));
         document.getElementById("today-classes").innerHTML = sorted.length
           ? sorted.map(c=>{
@@ -1728,7 +1731,8 @@
           .sort((a,b)=>a.start.localeCompare(b.start));
 
         const now = new Date();
-        const nowMin = now.getHours()*60+now.getMinutes();
+        // Convert standard time to Ethiopian local time (ET = standard - 6 hours)
+        const nowMin = ((now.getHours()*60+now.getMinutes()) - 360 + 1440) % 1440;
 
         const dateStr = dt.toLocaleDateString("en-ET",{weekday:"long",month:"long",day:"numeric"});
         const count = dayClasses.length;
