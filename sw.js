@@ -1,12 +1,11 @@
-const CACHE_NAME = 'eduplan-v1.8'; // Updated version to force clear old broken caches
+const CACHE_NAME = 'eduplan-v1.9'; // Updated version to force clear old broken caches
 
 const ASSETS_TO_CACHE = [
   './',
   'index.html',
+  './icon.png',
   'manifest.json',
-  // Caching the exact remote icon used in your manifest.json
   'https://cdn-icons-png.flaticon.com/512/3534/3534033.png',
-  // Caching the exact font package stylesheet requested by your index.html
   'https://fonts.googleapis.com/css2?family=Sora:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap'
 ];
 
